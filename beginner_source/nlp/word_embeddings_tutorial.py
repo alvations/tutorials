@@ -162,6 +162,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+from torch.autograd import Variable
 
 torch.manual_seed(1)
 
@@ -169,7 +170,7 @@ torch.manual_seed(1)
 
 word_to_ix = {"hello": 0, "world": 1}
 embeds = nn.Embedding(2, 5)  # 2 words in vocab, 5 dimensional embeddings
-lookup_tensor = torch.tensor([word_to_ix["hello"]], dtype=torch.long)
+lookup_tensor = Variable(torch.LongTensor([word_to_ix["world"]]))
 hello_embed = embeds(lookup_tensor)
 print(hello_embed)
 
@@ -267,6 +268,9 @@ for epoch in range(10):
         total_loss += loss.item()
     losses.append(total_loss)
 print(losses)  # The loss decreased every iteration over the training data!
+
+# To retrieve the embedding for a particular word, e.g. "beauty" 
+print(model.embeddings.weight[word_to_ix['beauty']])
 
 
 ######################################################################
