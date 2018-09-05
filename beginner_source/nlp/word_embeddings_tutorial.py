@@ -268,6 +268,9 @@ for epoch in range(10):
     losses.append(total_loss)
 print(losses)  # The loss decreased every iteration over the training data!
 
+# To retrieve the embedding for a particular word, e.g. "beauty" 
+print(model.embeddings.weight[word_to_ix['beauty']])
+
 
 ######################################################################
 # Exercise: Computing Word Embeddings: Continuous Bag-of-Words
